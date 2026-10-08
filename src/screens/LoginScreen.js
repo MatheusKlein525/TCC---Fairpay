@@ -10,6 +10,7 @@ import {
 
 import Input from '../components/Input';
 import PrimaryButton from '../components/PrimaryButton';
+import BackgroundWaves from '../components/BackgroundWaves';
 
 import { colors } from '../styles/theme';
 
@@ -19,11 +20,24 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState('');
 
   function handleLogin() {
+
+    if (!email.trim() || !password.trim()) {
+      alert('Preencha o email e a senha.');
+      return;
+    }
+
     navigation.replace('Home');
   }
 
   return (
     <View style={styles.container}>
+
+      {/* ONDAS DE FUNDO */}
+
+      <BackgroundWaves />
+
+
+      {/* LOGO */}
 
       <View style={styles.logoContainer}>
         <Image
@@ -32,6 +46,9 @@ export default function LoginScreen({ navigation }) {
           resizeMode="contain"
         />
       </View>
+
+
+      {/* FORMULÁRIO */}
 
       <View style={styles.form}>
 
@@ -91,6 +108,8 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     marginBottom: 40,
+
+    zIndex: 1,
   },
 
   logo: {
@@ -100,6 +119,8 @@ const styles = StyleSheet.create({
 
   form: {
     width: '100%',
+
+    zIndex: 1,
   },
 
   links: {

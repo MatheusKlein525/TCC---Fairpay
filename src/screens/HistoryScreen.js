@@ -1,19 +1,19 @@
+
 import React from 'react';
 
 import {
   View,
   Text,
   ScrollView,
+  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 
-import {
-  Ionicons,
-} from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import { colors } from '../styles/theme';
 
-export default function HistoryScreen() {
+export default function HistoryScreen({ navigation }) {
 
   const purchases = [
     {
@@ -33,26 +33,36 @@ export default function HistoryScreen() {
   return (
     <View style={styles.container}>
 
+      {/* CABEÇALHO */}
+
       <View style={styles.header}>
 
-        <Ionicons
-          name="home-outline"
-          size={25}
-          color={colors.white}
-        />
+        <TouchableOpacity
+          style={styles.headerButton}
+          onPress={() => navigation.navigate('Home')}
+        >
+          <Ionicons
+            name="home-outline"
+            size={25}
+            color={colors.white}
+          />
+        </TouchableOpacity>
 
         <Text style={styles.title}>
-          Histórico de compras
+          HISTÓRICO DE COMPRAS
         </Text>
 
-        <Ionicons
-          name="menu"
-          size={25}
-          color={colors.white}
-        />
+        <TouchableOpacity style={styles.headerButton}>
+          <Ionicons
+            name="menu"
+            size={25}
+            color={colors.white}
+          />
+        </TouchableOpacity>
 
       </View>
 
+      {/* LISTA DE COMPRAS */}
 
       <ScrollView style={styles.list}>
 
@@ -100,6 +110,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
 
+  /* CABEÇALHO PADRONIZADO */
+
   header: {
     height: 112,
     backgroundColor: colors.primary,
@@ -108,33 +120,40 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'space-between',
 
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingBottom: 15,
+  },
+
+  headerButton: {
+    width: 30,
+    height: 38,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   title: {
-    color: colors.white,
+    flex: 1,
+    color: '#FFFFFF',
 
-    fontSize: 16,
-    fontWeight: '900',
-    fontStyle: 'italic',
+    fontSize: 20,
+    fontWeight: 'bold',
+
+    textAlign: 'center',
   },
+
+  /* LISTA */
 
   list: {
     margin: 15,
-
     backgroundColor: '#E9E5E5',
     borderRadius: 8,
-
     padding: 10,
   },
 
   purchase: {
     backgroundColor: '#F7F4F4',
-
     borderRadius: 8,
-
     padding: 12,
-
     marginBottom: 12,
   },
 
@@ -151,8 +170,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-
-    fontSize: 10,
   },
 
 });

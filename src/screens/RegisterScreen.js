@@ -13,18 +13,25 @@ import { Ionicons } from '@expo/vector-icons';
 
 import Input from '../components/Input';
 import PrimaryButton from '../components/PrimaryButton';
+import BackgroundWaves from '../components/BackgroundWaves';
 
 import { colors } from '../styles/theme';
 
 export default function RegisterScreen({ navigation }) {
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [showPassword, setShowPassword] = useState(false);
 
   function handleRegister() {
-    // Por enquanto, apenas volta para o login.
-    // Depois podemos colocar o cadastro real aqui.
+
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      alert('Preencha todos os campos.');
+      return;
+    }
+
     navigation.navigate('Login');
   }
 
@@ -34,14 +41,21 @@ export default function RegisterScreen({ navigation }) {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
 
-      {/* Decoração superior */}
-      <View style={styles.topDecoration} />
+      {/* ONDAS DE FUNDO */}
+
+      <BackgroundWaves />
+
+
+      {/* CONTEÚDO */}
 
       <View style={styles.content}>
 
         <Text style={styles.title}>
           Bem Vindo
         </Text>
+
+
+        {/* FORMULÁRIO */}
 
         <View style={styles.form}>
 
@@ -56,6 +70,9 @@ export default function RegisterScreen({ navigation }) {
             value={email}
             onChangeText={setEmail}
           />
+
+
+          {/* SENHA */}
 
           <View style={styles.passwordContainer}>
 
@@ -83,6 +100,7 @@ export default function RegisterScreen({ navigation }) {
 
           </View>
 
+
           <PrimaryButton
             title="Salvar"
             onPress={handleRegister}
@@ -91,9 +109,6 @@ export default function RegisterScreen({ navigation }) {
         </View>
 
       </View>
-
-      {/* Decoração inferior */}
-      <View style={styles.bottomDecoration} />
 
     </KeyboardAvoidingView>
   );
@@ -108,19 +123,16 @@ const styles = StyleSheet.create({
 
   content: {
     flex: 1,
-
     justifyContent: 'center',
-
     paddingHorizontal: 40,
+
+    zIndex: 1,
   },
 
   title: {
     textAlign: 'center',
-
     color: '#888',
-
     fontSize: 16,
-
     marginBottom: 28,
   },
 
@@ -134,45 +146,10 @@ const styles = StyleSheet.create({
 
   eyeButton: {
     position: 'absolute',
-
     right: 12,
     top: 14,
 
     zIndex: 10,
-  },
-
-  topDecoration: {
-    position: 'absolute',
-
-    width: 150,
-    height: 100,
-
-    borderBottomRightRadius: 100,
-
-    borderBottomWidth: 1,
-    borderRightWidth: 1,
-
-    borderColor: '#65D5A8',
-
-    top: -40,
-    left: -40,
-  },
-
-  bottomDecoration: {
-    position: 'absolute',
-
-    width: 140,
-    height: 100,
-
-    borderTopLeftRadius: 100,
-
-    borderTopWidth: 1,
-    borderLeftWidth: 1,
-
-    borderColor: '#65D5A8',
-
-    bottom: -40,
-    right: -40,
   },
 
 });
